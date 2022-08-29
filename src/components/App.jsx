@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Section from './PhoneBook/Section';
 import Form from './PhoneBook/Form';
 import Contacts from './PhoneBook/Contacts';
 import Filter from './PhoneBook/Filter';
 import { nanoid } from 'nanoid';
+import { ContainerForm } from './PhoneBook/PhoneBook.module';
 
 export default class App extends Component {
   state = {
@@ -52,20 +52,16 @@ export default class App extends Component {
     );
 
     return (
-      <>
-        <Section>
-          <Form onSubmit={this.addContacts} />
-        </Section>
-
-        <Section>
-          Contacts
-          <Filter value={filter} onChange={this.changeFilter} />
-          <Contacts
-            contacts={visibleContacts}
-            onDeleteContact={this.deleteContact}
-          />
-        </Section>
-      </>
+      <ContainerForm>
+        <h1>Phonebook</h1>
+        <Form onSubmit={this.addContacts} />
+        <h2>Contacts</h2>
+        <Filter value={filter} onChange={this.changeFilter} />
+        <Contacts
+          contacts={visibleContacts}
+          onDeleteContact={this.deleteContact}
+        />
+      </ContainerForm>
     );
   }
 }
