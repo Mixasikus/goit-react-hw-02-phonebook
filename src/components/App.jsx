@@ -12,14 +12,29 @@ export default class App extends Component {
   };
 
   addContacts = data => {
+    const { name, number } = data;
     const contact = {
       id: nanoid(),
-      name: data.name,
-      number: data.number,
+      name: name,
+      number: number,
     };
 
+    const namesArray = this.state.contacts.map(contact => {
+      return contact.name;
+    });
+
+    if (namesArray.includes(name)) {
+      alert('такое уже есть');
+    } else {
+      this.setState(prevState => ({
+        contacts: [contact, ...prevState.contacts],
+      }));
+    }
+  };
+
+  deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
@@ -35,7 +50,6 @@ export default class App extends Component {
     const visibleContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
-    // console.log(visibleContacts);
 
     return (
       <>
@@ -46,7 +60,10 @@ export default class App extends Component {
         <Section>
           Contacts
           <Filter value={filter} onChange={this.changeFilter} />
-          <Contacts contacts={visibleContacts} />
+          <Contacts
+            contacts={visibleContacts}
+            onDeleteContact={this.deleteContact}
+          />
         </Section>
       </>
     );

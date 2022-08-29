@@ -31,6 +31,7 @@ export default class Form extends Component {
   };
 
   render() {
+    const { name, number } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor={this.nameInputId}>
@@ -39,7 +40,7 @@ export default class Form extends Component {
             type="text"
             name="name"
             id={this.nameInputId}
-            value={this.state.name}
+            value={name}
             onChange={this.handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -51,7 +52,7 @@ export default class Form extends Component {
           <input
             type="tel"
             name="number"
-            value={this.state.number}
+            value={number}
             onChange={this.handleChange}
             id={this.telInputId}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
