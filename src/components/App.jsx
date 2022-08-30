@@ -23,7 +23,7 @@ export default class App extends Component {
       return contact.name;
     });
 
-    if (namesArray.includes(name)) {
+    if (namesArray.find(person => person === name)) {
       alert('такое уже есть');
     } else {
       this.setState(prevState => ({
